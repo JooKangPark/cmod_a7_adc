@@ -32,7 +32,6 @@ wire        adc_valid;
 
 adc_if u_adc_if (
     .clk_100m   (clk_100m),
-    .clk_locked (clk_locked),
     .rst        (sys_rst),
     .vauxp      (vauxp),
     .vauxn      (vauxn),
