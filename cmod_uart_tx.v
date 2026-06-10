@@ -1,15 +1,16 @@
 module uart_tx #(
-    parameter integer CLK_FREQ_HZ = 12_000_000,
+    parameter integer CLK_FREQ_HZ = 100_000_000,
     parameter integer BAUD_RATE   = 115200
-)(
-    input  wire       clk,
-    input  wire       rst,       // active high
-    input  wire [7:0] data_in,
-    input  wire       send,      // 1-cycle pulse
-    output reg        tx,
-    output reg        busy
-);
-
+)
+    (
+        input  wire       clk,
+        input  wire       rst,       // active high
+        input  wire [7:0] data_in,
+        input  wire       send,      // 1-cycle pulse
+        output reg        tx,
+        output reg        busy
+    );
+    
     localparam integer CLKS_PER_BIT = CLK_FREQ_HZ / BAUD_RATE;
 
     reg [15:0] clk_cnt;
