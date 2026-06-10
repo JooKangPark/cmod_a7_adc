@@ -1,6 +1,6 @@
 module adc_if (
     input  wire       clk_100m,
-    input  wire       clk_locked,
+    input  wire       rst,
     input  wire       vauxp,
     input  wire       vauxn,
     output reg [11:0] data_out,
@@ -16,7 +16,7 @@ module adc_if (
 
     xadc_wiz_0 u_xadc (
         .dclk_in   (clk_100m),
-        .reset_in  (xadc_rst),
+        .reset_in  (rst),
 
         // DRP ports
         .daddr_in  (daddr_in),  // input, Address bus
@@ -28,12 +28,12 @@ module adc_if (
 
         .vauxp4    (vauxp),
         .vauxn4    (vauxn),
-        
+
         .eoc_out   (enable)     // output, end of conversion, wiring with den_in
     );
 
     always @(posedge clk_100m) begin
-        if (xadc_rst) begin
+        if (rst) begin
             daddr_in   <= CH_ADDR;
             data_out   <= 12'd0;
             data_valid <= 1'b0;
